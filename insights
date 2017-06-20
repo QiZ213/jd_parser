@@ -1,0 +1,97 @@
+The skills with less significance is overpowering the important ones
+and hence affecting the ranks drastically.
+
+>Need to preprocess relationships as well. 
+>Extract every information from Resume Experience
+>Not only skills
+>How cool would it be if the JD says, 
+	"Preferred open source contributor in XYZ"
+	and we get a resume with
+	"Worked as a contributor in XYZ"
+
+>>>>The experience is the most important data point, we're neglecting it
+	heavily as of now. Need to shift everything once I find a feasible
+	solution to it. 
+
+ 
+
+
+('Skills', 'NNP'),
+ ('&', 'CC'),
+ ('Experience', 'NNP'),
+ ('Required', 'NNP'),
+ ('4-7', 'CD'),
+ ('years', 'NNS'),
+ ('experience', 'NN'),
+ ('software', 'NN'),
+ ('product', 'NN'),
+ ('development', 'NN'),
+ ('.', '.'),
+ ('Solid', 'JJ'),
+ ('hands-on', 'JJ'),
+ ('programming', 'NN'),
+ ('experience', 'NN'),
+ ('Java', 'NNP'),
+ ('developing', 'VBG'),
+ ('high', 'JJ'),
+ ('quality', 'NN'),
+ ('readable', 'JJ'),
+ ('code', 'NN'),
+ ('.', '.'),
+ ('Proficient', 'NNP'),
+ ('Distributed', 'VBD'),
+ ('computing', 'VBG'),
+ (',', ','),
+ ('Design', 'NNP'),
+ ('patterns', 'VBZ'),
+ ('.', '.'),
+ ('Hands', 'NNS'),
+ ('experience', 'NN'),
+ ('designing', 'VBG'),
+ ('developing', 'VBG'),
+ ('Service', 'NNP'),
+ ('Oriented', 'NNP'),
+ ('Architecture', 'NNP'),
+ ('applications', 'NNS'),
+ ('RESTful', 'NNP'),
+ ('services', 'NNS'),
+ ('using', 'VBG'),
+ ('JEE', 'NNP'),
+ (',', ','),
+ ('Spring', 'NNP'),
+ ('Tomcat', 'NNP'),
+ ('.', '.'),
+ ('Proficiency', 'NNP'),
+ ('open', 'JJ'),
+ ('source', 'NN'),
+ ('products', 'NNS'),
+ ('-', ':'),
+ ('Apache', 'NNP'),
+ (',', ','),
+ ('WSO2', 'NNP'),
+ ('either', 'CC'),
+ ('contributor', 'NN'),
+ ('user', 'NN'),
+ ('preferred', 'JJ'),
+ ('.', '.'),
+ ('Experience', 'NN'),
+ ('developing', 'VBG'),
+ ('deploying', 'VBG'),
+ ('scalable', 'JJ'),
+ ('applications', 'NNS'),
+ ('Cloud', 'NNP'),
+ ('environment', 'NN'),
+ ('\xe2\x80\x93', 'NNP'),
+ ('AWS', 'NNP'),
+ (',', ','),
+ ('RackSpace', 'NNP'),
+ (',', ','),
+ ('etc', 'FW'),
+ ('.', '.'),
+ ('Experience', 'NNP'),
+ ('RDBMS', 'NNP'),
+ ('No', 'NNP'),
+ ('SQL', 'NNP'),
+ ('databases', 'VBZ'),
+ ('.', '.')]
+
