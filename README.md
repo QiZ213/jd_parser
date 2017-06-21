@@ -5,7 +5,7 @@
 JD Parser - FastNext
 
 JD Parser aims to extract and correlate relavant information from 
-a job description into a JSON which can be processed by the FastNext's
+a job description into a JSON which can be processed by FastNext's
 AI Matching Engine.
 
 The core of the challenge lies in extracting information from semi-
