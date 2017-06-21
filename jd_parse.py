@@ -8,12 +8,12 @@ import re
 
 
 class JDParser:
-# find paras which contain skills
+	# find paras which contain skills
 	def get_skill_paras(self, paras):
 		para_word_counts = [(i, len(word_tokenize(paras[i]))) for i in range(len(paras))]
 		counts = np.array([j for (i,j) in para_word_counts])
 		mean_count  = list(stats.describe(counts))[2]
-		skill_paras = [paras[i] for i in range(len(paras)) if counts[i] > mean_count]
+		skill_paras = [paras[i] for i in range(len(paras))]
 
 		return skill_paras
 
@@ -78,7 +78,7 @@ class JDParser:
 		if '/' in sent or ' or ' in sent:
 			slices = sent.replace(" or ", "/").split('/')
 			slices = [slice.split(" ") for slice in slices]
-			print slices
+			#print slices
 			for i in range(len(slices)-1):
 				optional_words.append((slices[i][-1], slices[i+1][0]))
 				slices[i].pop(-1)
@@ -96,13 +96,13 @@ class JDParser:
 				sent += " " +" ".join(slices[-1])
 				parsed_sents.append(sent)
 
-			print parsed_sents
+			#print parsed_sents
 			return parsed_sents
 		return [sent]
 
 	# returns jd
-	def get_jd(self):
-		file = open('test1', 'rb')
+	def get_jd(self, filename):
+		file = open(filename, 'rb')
 		jd = file.read()
 		file.close()
 		return jd
@@ -120,14 +120,14 @@ class JDParser:
 		tagged_jd = []
 		for sent in sents:
 			try:
-				tagged_words = pos_tag(sent.split(" "))
+				tagged_words = pos_tag(word_tokenize(sent))
 				tagged_jd.append(tagged_words)
 			except Exception as e:
 				print(str(e))
 				print sent
 
 
-		print tagged_jd
+		#print tagged_jd
 		skill_list = self.find_skills_chunked(tagged_jd)
 		return list(set(skill_list))
 
@@ -135,7 +135,7 @@ class JDParser:
 def main():
 
 	jp = JDParser()
-	jd = jp.get_jd()
+	jd = jp.get_jd('test1')
 	jd_paras = jd.replace('\n\n', '<p>').split('<p>')
 	skill_paras = jp.get_skill_paras(jd_paras)
 	all_skills =[]
@@ -143,7 +143,8 @@ def main():
 	for skill_para in skill_paras:
 		skill_list = jp.get_skills_from_para(skill_para)
 		all_skills += skill_list
-
+	
+	print all_skills
 	return list(set(all_skills))
 
 
