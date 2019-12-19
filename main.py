@@ -3,7 +3,7 @@ from jd_parse import JDParser
 
 def main():
 	jp = JDParser()
-	jd = jp.get_jd('test1')
+	jd = jp.get_jd('test3')
 	jd_paras = jd.replace('\n\n', '<p>').split('<p>')
 	skill_paras = jp.get_skill_paras(jd_paras)
 	all_skills =[]

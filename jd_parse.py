@@ -1,10 +1,9 @@
-import nltk
-from nltk.tokenize import sent_tokenize, word_tokenize
-from nltk.corpus import stopwords
-from nltk import pos_tag
-import numpy as np
-from scipy import stats
 import re
+import nltk
+import numpy as np
+from nltk import pos_tag
+from nltk.tokenize import sent_tokenize, word_tokenize
+from scipy import stats
 
 
 class JDParser:
@@ -102,7 +101,7 @@ class JDParser:
 
 	# returns jd
 	def get_jd(self, filename):
-		file = open(filename, 'rb')
+		file = open(filename, 'r')
 		jd = file.read()
 		file.close()
 		return jd
@@ -124,8 +123,7 @@ class JDParser:
 				tagged_jd.append(tagged_words)
 			except Exception as e:
 				print(str(e))
-				print sent
-
+				print(sent)
 
 		#print tagged_jd
 		skill_list = self.find_skills_chunked(tagged_jd)
@@ -135,16 +133,17 @@ class JDParser:
 def main():
 
 	jp = JDParser()
-	jd = jp.get_jd('test1')
+	jd = jp.get_jd('test3')
 	jd_paras = jd.replace('\n\n', '<p>').split('<p>')
+	print(jd_paras)
 	skill_paras = jp.get_skill_paras(jd_paras)
 	all_skills =[]
 
 	for skill_para in skill_paras:
 		skill_list = jp.get_skills_from_para(skill_para)
 		all_skills += skill_list
-	
-	print all_skills
+
+	print(all_skills)
 	return list(set(all_skills))
 
 

@@ -16,7 +16,7 @@ def find_co_matrix(query):
 	start = time.time()
 
 	details = solr_data(query, num_query)
-	print time.time() - start
+	print(time.time() - start)
 	#print "Solr data gathered..."
 	skill_list = []
 
@@ -88,19 +88,19 @@ def find_nearest_neighbour(query, co_matrix_num, skill_list):
 		for skill2 in skill_list:
 			if co_matrix_num[ skill_dict[skill1] ][ skill_dict[skill2] ] > 2:
 				co_mat_list.append([ skill1 + '-' + skill2, co_matrix_num[ skill_dict[skill1] ][ skill_dict[skill2] ]])
-	print "Linear co_mat list built..."
+	print("Linear co_mat list built...")
 	co_mat_list = sorted(co_mat_list, key = itemgetter(1))
-	print "Final list sorted..."
-	
+	print("Final list sorted...")
+
 	#co_mat_list.pop()
 	co_mat_list.pop()
-	print len(co_mat_list)
+	print(len(co_mat_list))
 	#print co_mat_list
 	
 	for row in co_mat_list:
 		if query not in row[0]:
 			co_mat_list.pop(co_mat_list.index(row))
-	print "rows cleaned..."
+	print("rows cleaned...")
 	last_row_skills = co_mat_list[len(co_mat_list) - 2][0]
 
 	nearest_neighbour = ""
@@ -111,7 +111,7 @@ def find_nearest_neighbour(query, co_matrix_num, skill_list):
 
 	#print query + "->" + nearest_neighbour		
 	#print time.time() - start
-	print "nearest neighbour returned.."
+	print("nearest neighbour returned..")
 	return nearest_neighbour
 
 
@@ -140,7 +140,7 @@ def rank_cand_old(jd, candidate_list, primary_skill):
 	details = solr_data(primary_skill, num_query)
 	co_matrix, primary_skill_list = find_co_matrix(query)
 
-	print "Solr data gathered..."
+	print("Solr data gathered...")
 	skill_list = []
 
 	for i in range(len(details)):
@@ -156,9 +156,9 @@ def rank_cand_old(jd, candidate_list, primary_skill):
 				skill_list.append(skill.lower())
 
 
-	skill_list.sort()	
-	print "skill list sorted..."
-	
+	skill_list.sort()
+	print("skill list sorted...")
+
 	candidate_tuple = []
 
 	for candidate in candidate_list:
@@ -178,15 +178,15 @@ def rank_cand_old(jd, candidate_list, primary_skill):
 		word = word.lower()
 		if word not in stop and word in skill_list:
 			cleaned_jd.append(word)
-	'''		
-	print skill_list
+	'''
+	print(skill_list)
 	for skill in skill_list:
 		if skill in jd:
-			cleaned_jd.append(skill)		
+			cleaned_jd.append(skill)
 
-	print "jd cleaned..."
-	print cleaned_jd
- 
+	print("jd cleaned...")
+	print(cleaned_jd)
+
 	for candidate in candidate_tuple:
 		skills = candidate[1]
 
@@ -197,10 +197,9 @@ def rank_cand_old(jd, candidate_list, primary_skill):
 				candidate[2] += 50
 
 		candidate[2] = candidate[2]/len(cleaned_jd)
-		print candidate[2]
+		print(candidate[2])
 
-
-	candidate_tuple = sorted(candidate_tuple, key = itemgetter(2))	
+	candidate_tuple = sorted(candidate_tuple, key = itemgetter(2))
 	interns = []
 	for candidate in candidate_tuple:
 		interns.append(candidate[0])
@@ -234,16 +233,16 @@ def rank_cand(jd, candidate_list, query):
 			jd_quad_words.append(jd_triple_words[i-1] + ' ' + jd_single_words[i+2])
 	
 	#I assumed the number of word in a match b/w JD and skillset won't be likely more than 4		
-	print jd_single_words
-	print jd_double_words
-	print jd_triple_words
-	print jd_quad_words
+	print(jd_single_words)
+	print(jd_double_words)
+	print(jd_triple_words)
+	print(jd_quad_words)
 
 	for skill in universal_skill_set:
 		if skill in jd_single_words or skill in jd_double_words or skill in jd_triple_words or skill in jd_quad_words:
 			jd_skill_list.append(skill)
 
-	print jd_skill_list	
+	print(jd_skill_list)
 
 	candidate_tuple = []
 	for candidate in candidate_list:
@@ -268,16 +267,16 @@ def rank_cand(jd, candidate_list, query):
 				skills.pop(skills.index(skill))
 		#print skills		
 
-		candidate_tuple.append([candidate, skills, 0])	
+		candidate_tuple.append([candidate, skills, 0])
 
-	print len(candidate_list)
-	print(len(candidate_tuple))	
+	print(len(candidate_list))
+	print(len(candidate_tuple))
 
 	nearest_neighbour = {}
 	for skill in jd_skill_list:
 		co_matrix, universal_skill_set = find_co_matrix(skill)
 		nearest_neighbour[skill] = find_nearest_neighbour(skill, co_matrix, universal_skill_set)
-	print nearest_neighbour	
+	print(nearest_neighbour)
 
 	for candidate in candidate_tuple:
 		skills = candidate[1]
@@ -300,17 +299,17 @@ def rank_cand(jd, candidate_list, query):
 			#print jd_skill_list
 			#print skills
 			#print candidate[2]	
-		print candidate[2]	
-		candidate[2] = candidate[2]/len(jd_skill_list)	
+		print(candidate[2])
+		candidate[2] = candidate[2]/len(jd_skill_list)
 
 	candidate_tuple = sorted(candidate_tuple, key = itemgetter(2))
 	for candidate in candidate_tuple:
-		print candidate[1]
-		print candidate[2]
+		print(candidate[1])
+		print(candidate[2])
 	candidates = []
 	for candidate in candidate_tuple:
 		candidates.append(candidate[0])
-	print candidates
+	print(candidates)
 	return candidates
 
 
@@ -345,10 +344,10 @@ def find_skill_from_jd(jd, query):
 			jd_quad_words.append(jd_triple_words[i-1] + ' ' + jd_single_words[i+2])
 	
 	#I assumed the number of word in a match b/w JD and skillset won't be likely more than 4		
-	print jd_single_words
-	print jd_double_words
-	print jd_triple_words
-	print jd_quad_words
+	print(jd_single_words)
+	print(jd_double_words)
+	print(jd_triple_words)
+	print(jd_quad_words)
 
 	for skill in universal_skill_set:
 		if skill in jd_single_words or skill in jd_double_words or skill in jd_triple_words or skill in jd_quad_words:
